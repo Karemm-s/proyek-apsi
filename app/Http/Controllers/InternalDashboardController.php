@@ -6,6 +6,7 @@ use App\Models\AuditLog;
 use App\Models\CaseAssignment;
 use App\Models\CaseSummons;
 use App\Models\CounselingSession;
+use App\Models\Evidence;
 use App\Models\Report;
 use App\Models\ReportStatusHistory;
 use App\Models\User;
@@ -194,8 +195,44 @@ class InternalDashboardController extends Controller
     public function reports(Request $request)
     {
         abort_unless($request->user()->hasRole('ketua_satgas', 'pimpinan'), 403);
-        $reports = Report::query()->select(['id', 'ticket_number', 'incident_type', 'status', 'created_at', 'updated_at', 'requires_follow_up', 'referred_at', 'resolved_at'])->latest()->paginate(20);
+        $filters = $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+            'status' => ['nullable', 'string', 'max:80'],
+            'category' => ['nullable', 'in:verbal,non_fisik,fisik,daring,lainnya'],
+        ]);
+        $query = Report::query()->select(['id', 'ticket_number', 'incident_type', 'status', 'created_at', 'updated_at', 'requires_follow_up', 'referred_at', 'resolved_at']);
+        if (! empty($filters['q'])) {
+            $query->where('ticket_number', 'like', '%'.$filters['q'].'%');
+        }
+        if (! empty($filters['status'])) $query->where('status', $filters['status']);
+        if (! empty($filters['category'])) $query->where('incident_type', $filters['category']);
+        $reports = $query->latest()->paginate(20)->withQueryString();
         return view('internal.reports', compact('reports'));
+    }
+
+    public function storeEvidence(Request $request, Report $report)
+    {
+        $this->authorize('update', $report);
+        $data = $request->validate([
+            'type' => ['required', 'in:bukti_laporan,berita_acara'],
+            'evidence' => ['required', 'array', 'max:5'],
+            'evidence.*' => ['required', 'file', 'max:10240', 'mimes:jpg,jpeg,png,pdf,mp3,mp4,webm,doc,docx'],
+        ]);
+        foreach ($request->file('evidence') as $file) {
+            $path = $file->store('reports/'.$report->id, 'local');
+            Evidence::create([
+                'report_id' => $report->id,
+                'type' => $data['type'],
+                'disk' => 'local',
+                'path' => $path,
+                'original_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getMimeType() ?: 'application/octet-stream',
+                'size' => $file->getSize(),
+            ]);
+        }
+        AuditLog::create(['user_id' => $request->user()->id, 'report_id' => $report->id, 'action' => 'evidence_uploaded', 'reason' => count($request->file('evidence')).' file '.str_replace('_', ' ', $data['type']).' ditambahkan.', 'ip_address' => $request->ip(), 'created_at' => now()]);
+
+        return back()->with('success', 'Lampiran berhasil ditambahkan.');
     }
 
     public function assignments(Request $request)
@@ -205,6 +242,16 @@ class InternalDashboardController extends Controller
         $psychologists = User::where('role', 'psikolog')->where('is_active', true)->orderBy('name')->get(['id', 'name']);
         $staff = User::where('role', 'tim_satgas')->where('is_active', true)->orderBy('name')->get(['id', 'name', 'gender']);
         return view('internal.assignments', compact('reports', 'psychologists', 'staff'));
+    }
+
+    public function staffAssignments(Request $request)
+    {
+        $reports = Report::query()->where('assigned_user_id', $request->user()->id)
+            ->select(['id', 'ticket_number', 'incident_type', 'status', 'created_at', 'requires_follow_up'])
+            ->with(['psychologistFeedback' => fn ($query) => $query->latest()->with('psychologist:id,name')])
+            ->latest()->paginate(20);
+
+        return view('internal.staff-assignments', compact('reports'));
     }
 
     public function unmasking()
@@ -221,15 +268,33 @@ class InternalDashboardController extends Controller
         return view('internal.escalations', compact('reports'));
     }
 
-    public function summons()
+    public function leadershipExcerpt(int $reportId)
     {
-        $reports = Report::query()->select(['id', 'ticket_number', 'incident_type', 'status'])->latest()->get();
-        $summons = CaseSummons::with('report:id,ticket_number')->latest()->paginate(25);
+        $report = Report::query()->select(['id', 'ticket_number', 'incident_type', 'status', 'created_at', 'updated_at', 'requires_follow_up', 'referred_at', 'resolved_at'])
+            ->with(['statusHistories' => fn ($query) => $query->select(['id', 'report_id', 'from_status', 'to_status', 'created_at'])->latest()])
+            ->findOrFail($reportId);
+        abort_unless(in_array($report->status, ['ketidakhadiran_berlanjut', 'eskalasi_pimpinan'], true) || $report->requires_follow_up, 404);
+        AuditLog::create(['user_id' => request()->user()->id, 'report_id' => $report->id, 'action' => 'leadership_excerpt_viewed', 'reason' => 'Ringkasan terbatas kasus dibuka oleh pimpinan.', 'ip_address' => request()->ip(), 'created_at' => now()]);
+
+        return response()->view('internal.leadership-excerpt', compact('report'), 200, ['Cache-Control' => 'no-store, private']);
+    }
+
+    public function summons(Request $request)
+    {
+        $reportQuery = Report::query();
+        $summonsQuery = CaseSummons::query();
+        if ($request->user()->role === 'tim_satgas') {
+            $reportQuery->where('assigned_user_id', $request->user()->id);
+            $summonsQuery->whereIn('report_id', (clone $reportQuery)->select('id'));
+        }
+        $reports = $reportQuery->select(['id', 'ticket_number', 'incident_type', 'status'])->latest()->get();
+        $summons = $summonsQuery->with('report:id,ticket_number')->latest()->paginate(25);
         return view('internal.summons', compact('reports', 'summons'));
     }
 
     public function storeSummons(Request $request, Report $report)
     {
+        $this->authorize('view', $report);
         $data = $request->validate([
             'target_name' => ['required', 'string', 'max:160'],
             'target_role' => ['nullable', 'string', 'max:100'],
@@ -248,6 +313,7 @@ class InternalDashboardController extends Controller
 
     public function updateSummons(Request $request, CaseSummons $summons)
     {
+        $this->authorize('view', $summons->report);
         $data = $request->validate(['status' => ['required', 'in:surat_disampaikan,menunggu_konfirmasi,hadir,tidak_hadir'], 'notes' => ['nullable', 'string', 'max:2000']]);
         $status = $data['status'];
         $allowedTransitions = [
@@ -272,6 +338,7 @@ class InternalDashboardController extends Controller
 
     public function printSummons(Request $request, CaseSummons $summons)
     {
+        $this->authorize('view', $summons->report);
         $summons->load('report:id,ticket_number');
         AuditLog::create(['user_id' => $request->user()->id, 'report_id' => $summons->report_id, 'action' => 'summons_draft_printed', 'reason' => 'Draft surat pemanggilan SP-'.$summons->sequence.' dicetak.', 'ip_address' => $request->ip(), 'created_at' => now()]);
         return view('internal.summons-print', compact('summons'));
@@ -310,13 +377,17 @@ class InternalDashboardController extends Controller
         if ($user->role === 'psikolog') {
             $report = Report::query()->select(['id', 'ticket_number', 'incident_type', 'status', 'created_at', 'referred_at'])->findOrFail($reportId);
             $sessions = CounselingSession::where('report_id', $reportId)->where('psychologist_id', $user->id)->orderByDesc('scheduled_at')->get();
+            $feedbacks = collect();
 
-            return view('internal.case-psychologist', compact('report', 'sessions'));
+            return view('internal.case-psychologist', compact('report', 'sessions', 'feedbacks'));
         }
 
         $this->authorize('view', Report::findOrFail($reportId));
 
-        $report = Report::with(['evidence:id,report_id,original_name,mime_type,size,created_at', 'statusHistories.user:id,name'])->findOrFail($reportId);
+        $report = Report::with(['evidence:id,report_id,type,original_name,mime_type,size,created_at', 'statusHistories.user:id,name', 'psychologistFeedback.psychologist:id,name'])->findOrFail($reportId);
+        $evidenceHistory = AuditLog::with('user:id,name')->where('report_id', $report->id)
+            ->whereIn('action', ['evidence_uploaded', 'evidence_previewed', 'evidence_downloaded'])
+            ->latest('created_at')->get();
         $reporter = $report->reporter_data;
         $maskedReporter = [
             'name' => $this->maskName($reporter['reporter_name'] ?? ''),
@@ -324,7 +395,7 @@ class InternalDashboardController extends Controller
             'identity' => 'Dilindungi',
         ];
 
-        return view('internal.case-detail', compact('report', 'maskedReporter'));
+        return view('internal.case-detail', compact('report', 'maskedReporter', 'evidenceHistory'));
     }
 
     private function maskName(string $name): string

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Crypt;
 
 class Evidence extends Model
 {
-    protected $fillable = ['report_id', 'disk', 'path', 'original_name', 'mime_type', 'size'];
+    protected $fillable = ['report_id', 'type', 'disk', 'path', 'original_name', 'mime_type', 'size'];
 
     protected function originalName(): Attribute
     {

@@ -7,13 +7,13 @@
 
 <style>
     .bullying-page {
-        --bp-ink: #344b50;
-        --bp-muted: #71838a;
-        --bp-teal: #416c72;
-        --bp-blue: #dce8f4;
-        --bp-sage: #dce9e2;
-        --bp-lavender: #e9e2f2;
-        --bp-cream: #f5efe8;
+        --bp-ink: #173B36;
+        --bp-muted: #58736E;
+        --bp-teal: #087F75;
+        --bp-blue: #BFDBFE;
+        --bp-sage: #A7F3D0;
+        --bp-lavender: #DDD6FE;
+        --bp-cream: #FED7AA;
 
         color: var(--bp-ink);
         padding-bottom: 75px;
@@ -45,9 +45,9 @@
         border-radius: 28px;
         background: linear-gradient(
             125deg,
-            #dce9e2 0%,
-            #dce8f4 55%,
-            #e9e2f2 100%
+            #A7F3D0 0%,
+            #BFDBFE 55%,
+            #DDD6FE 100%
         );
         margin-bottom: 45px;
     }
@@ -86,7 +86,7 @@
 
     .bp-hero p {
         max-width: 700px;
-        color: #5d7177;
+        color: #49645F;
         line-height: 1.8;
         margin-bottom: 0;
         font-size: 15px;
@@ -201,7 +201,7 @@
     .bp-help-box {
         padding: 32px;
         border-radius: 22px;
-        background: linear-gradient(120deg, #dce9e2, #e9e2f2);
+        background: linear-gradient(120deg, #A7F3D0, #DDD6FE);
         margin-top: 45px;
     }
 
@@ -212,7 +212,7 @@
     }
 
     .bp-help-box p {
-        color: #62777b;
+        color: #49645F;
         font-size: 14px;
         line-height: 1.8;
         max-width: 700px;
@@ -234,7 +234,7 @@
     }
 
     .bp-btn:hover {
-        background: #31565c;
+        background: #06645D;
         color: #fff;
         transform: translateY(-2px);
     }
@@ -251,7 +251,7 @@
     }
 
     .bp-back:hover {
-        color: #31565c;
+        color: #06645D;
     }
 
     @media (max-width: 768px) {

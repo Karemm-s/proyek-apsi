@@ -7,13 +7,13 @@
 
 <style>
     .confirmation-page {
-        --blue: #DCE8F4;
-        --sage: #DCE9E2;
-        --lavender: #E9E2F2;
-        --cream: #F5EFE8;
-        --teal: #416C72;
-        --dark: #344B50;
-        --muted: #71838A;
+        --blue: #BFDBFE;
+        --sage: #A7F3D0;
+        --lavender: #DDD6FE;
+        --cream: #FED7AA;
+        --teal: #087F75;
+        --dark: #173B36;
+        --muted: #58736E;
 
         min-height: 80vh;
         padding: 65px 20px 85px;
@@ -60,7 +60,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(145deg, #E1EFE6, #DCE8F4);
+        background: linear-gradient(145deg, #E1EFE6, #BFDBFE);
         box-shadow: 0 10px 30px rgba(65,108,114,.10);
         position: relative;
     }
@@ -146,7 +146,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #DCE9E2;
+        background: #A7F3D0;
         color: var(--teal);
     }
 
@@ -198,7 +198,7 @@
     }
 
     .btn-track:hover {
-        background: #345B60;
+        background: #06645D;
         color: white;
         transform: translateY(-2px);
     }

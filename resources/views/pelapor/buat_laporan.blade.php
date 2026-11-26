@@ -6,15 +6,15 @@
 @section('content')
 <style>
     .report-page {
-        --rp-ink: #344b50;
+        --rp-ink: #173B36;
         --rp-muted: #75878c;
-        --rp-teal: #416c72;
+        --rp-teal: #087F75;
         --rp-line: #e5ecee;
         padding: 52px 0 30px;
         background:
             radial-gradient(circle at 8% 5%, rgba(220,232,244,.72), transparent 28%),
             radial-gradient(circle at 94% 18%, rgba(233,226,242,.68), transparent 26%),
-            #f7f9fa;
+            #F3FAF7;
         color: var(--rp-ink);
     }
 
@@ -60,7 +60,7 @@
         align-items: flex-start;
         padding: 19px 21px;
         margin-bottom: 22px;
-        border: 1px solid #dce9e2;
+        border: 1px solid #A7F3D0;
         border-radius: 18px;
         background: linear-gradient(110deg, rgba(220,233,226,.68), rgba(255,255,255,.88));
     }
@@ -164,7 +164,7 @@
 
     .report-form .form-label {
         margin-bottom: 7px;
-        color: #465d62;
+        color: #264E47;
         font-size: .79rem;
         font-weight: 700;
     }
@@ -241,7 +241,7 @@
     .choice-option label strong {
         display: block;
         margin-bottom: 3px;
-        color: #465d62;
+        color: #264E47;
         font-size: .77rem;
     }
 
@@ -277,13 +277,13 @@
     .upload-empty-icon {
         display: block;
         margin-bottom: 10px;
-        color: #416c72;
+        color: #087F75;
         font-size: 2.2rem;
     }
 
     .upload-empty-title {
         margin-bottom: 5px;
-        color: #465d62;
+        color: #264E47;
         font-size: .85rem;
         font-weight: 800;
     }
@@ -304,7 +304,7 @@
         border: 1px solid #a9c2bd;
         border-radius: 10px;
         background: #edf5f1;
-        color: #416c72;
+        color: #087F75;
         font-size: .78rem;
         font-weight: 800;
         transition: .2s ease;
@@ -330,7 +330,7 @@
 
     .upload-feedback {
         margin-top: 12px;
-        color: #71858a;
+        color: #58736E;
         font-size: .72rem;
         line-height: 1.6;
     }
@@ -376,7 +376,7 @@
 
     .evidence-name {
         overflow: hidden;
-        color: #465d62;
+        color: #264E47;
         font-size: .79rem;
         font-weight: 700;
         text-overflow: ellipsis;
@@ -506,7 +506,7 @@
 
     .btn-submit-report:hover {
         transform: translateY(-2px);
-        background: #345a60;
+        background: #06645D;
     }
 
     .back-link {
@@ -514,7 +514,7 @@
         align-items: center;
         gap: 7px;
         margin-top: 20px;
-        color: #71858a;
+        color: #58736E;
         font-size: .77rem;
         font-weight: 700;
         text-decoration: none;
@@ -546,7 +546,7 @@
     .evidence-preview-modal .modal-body {
         min-height: 250px;
         padding: 18px;
-        background: #f8fafb;
+        background: #F3FAF7;
     }
 
     .preview-media {
@@ -638,7 +638,7 @@
             <div class="report-card-top">
                 <h2>
                     <i class="bi bi-file-earmark-text me-2"
-                       style="color:#416c72"></i>
+                       style="color:#087F75"></i>
                     Formulir Pengaduan PPKS
                 </h2>
 
@@ -1081,7 +1081,7 @@
 
                                     <div>
                                         <div class="fw-bold"
-                                             style="font-size:.82rem;color:#465d62;">
+                                             style="font-size:.82rem;color:#264E47;">
                                             <i class="bi bi-check-circle-fill me-1"
                                                style="color:#6e9b87;"></i>
                                             Bukti berhasil ditambahkan
@@ -1130,7 +1130,7 @@
                         <div class="evidence-list-header">
 
                             <h6 class="fw-bold mb-0"
-                                style="font-size:.82rem;color:#465d62;">
+                                style="font-size:.82rem;color:#264E47;">
                                 <i class="bi bi-paperclip me-1"></i>
                                 Daftar lampiran
                             </h6>
@@ -1138,7 +1138,7 @@
                             <span
                                 id="evidenceCount"
                                 class="badge rounded-pill"
-                                style="background:#eaf1ef;color:#416c72;"
+                                style="background:#eaf1ef;color:#087F75;"
                             >
                                 0 file
                             </span>

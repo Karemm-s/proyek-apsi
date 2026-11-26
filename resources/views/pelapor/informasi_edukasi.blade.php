@@ -7,13 +7,13 @@
 
 <style>
     .education-page {
-        --edu-ink: #344B50;
-        --edu-muted: #71838A;
-        --edu-blue: #DCE8F4;
-        --edu-sage: #DCE9E2;
-        --edu-lavender: #E9E2F2;
-        --edu-cream: #F5EFE8;
-        --edu-teal: #416C72;
+        --edu-ink: #173B36;
+        --edu-muted: #58736E;
+        --edu-blue: #BFDBFE;
+        --edu-sage: #A7F3D0;
+        --edu-lavender: #DDD6FE;
+        --edu-cream: #FED7AA;
+        --edu-teal: #087F75;
         background: #F8FAF9;
         color: var(--edu-ink);
         padding: 55px 0 80px;
@@ -25,7 +25,7 @@
     }
 
     .edu-hero {
-        background: linear-gradient(120deg, #DCE8F4, #E9E2F2, #DCE9E2);
+        background: linear-gradient(120deg, #BFDBFE, #DDD6FE, #A7F3D0);
         border-radius: 28px;
         padding: 55px 50px;
         position: relative;

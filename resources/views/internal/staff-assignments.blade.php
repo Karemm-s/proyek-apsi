@@ -1,0 +1,7 @@
+@extends('layouts.internal')
+@section('title','Tugas Saya')
+@section('heading','Kasus yang Ditugaskan kepada Saya')
+@section('content')
+<div class="alert alert-info">Halaman ini hanya menampilkan kasus yang ditugaskan kepada akun Tim Satgas ini. Identitas dan bukti tetap dilindungi sesuai kewenangan petugas.</div>
+<div class="card"><div class="table-responsive"><table class="table align-middle mb-0"><thead class="table-light"><tr><th>Tiket</th><th>Kategori</th><th>Status</th><th>Masuk</th><th>Umpan balik psikolog</th><th></th></tr></thead><tbody>@forelse($reports as $report)<tr><td class="fw-bold">{{ $report->ticket_number }}</td><td>{{ str_replace('_',' ',$report->incident_type) }}</td><td>{{ str_replace('_',' ',$report->status) }} @if($report->requires_follow_up)<span class="badge text-bg-warning">Tindak lanjut</span>@endif</td><td>{{ $report->created_at->format('d M Y') }}</td><td>@forelse($report->psychologistFeedback as $feedback)<div class="small mb-2"><strong>{{ $feedback->psychologist?->name }}</strong> · {{ $feedback->created_at->format('d M Y') }}<div class="muted">{{ \Illuminate\Support\Str::limit($feedback->recommendation, 130) }}</div></div>@empty<span class="small muted">Belum ada</span>@endforelse</td><td><a class="btn btn-sm btn-outline-secondary" href="{{ route('internal.case.show',$report->id) }}">Buka kasus</a></td></tr>@empty<tr><td colspan="6" class="text-center muted py-4">Belum ada penugasan aktif.</td></tr>@endforelse</tbody></table></div><div class="p-3">{{ $reports->links() }}</div></div>
+@endsection

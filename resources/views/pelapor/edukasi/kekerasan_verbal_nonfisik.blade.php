@@ -7,13 +7,13 @@
 
 <style>
     .verbal-detail-page {
-        --vd-ink: #344b50;
-        --vd-muted: #71838a;
-        --vd-teal: #416c72;
-        --vd-blue: #dce8f4;
-        --vd-sage: #dce9e2;
-        --vd-lavender: #e9e2f2;
-        --vd-cream: #f5efe8;
+        --vd-ink: #173B36;
+        --vd-muted: #58736E;
+        --vd-teal: #087F75;
+        --vd-blue: #BFDBFE;
+        --vd-sage: #A7F3D0;
+        --vd-lavender: #DDD6FE;
+        --vd-cream: #FED7AA;
 
         color: var(--vd-ink);
         padding-bottom: 75px;
@@ -45,9 +45,9 @@
         border-radius: 28px;
         background: linear-gradient(
             125deg,
-            #e9e2f2 0%,
-            #dce8f4 55%,
-            #dce9e2 100%
+            #DDD6FE 0%,
+            #BFDBFE 55%,
+            #A7F3D0 100%
         );
         margin-bottom: 45px;
     }
@@ -86,7 +86,7 @@
 
     .vd-hero p {
         max-width: 700px;
-        color: #5d7177;
+        color: #49645F;
         line-height: 1.8;
         margin-bottom: 0;
         font-size: 15px;
@@ -201,7 +201,7 @@
     .vd-help-box {
         padding: 32px;
         border-radius: 22px;
-        background: linear-gradient(120deg, #dce9e2, #e9e2f2);
+        background: linear-gradient(120deg, #A7F3D0, #DDD6FE);
         margin-top: 45px;
     }
 
@@ -212,7 +212,7 @@
     }
 
     .vd-help-box p {
-        color: #62777b;
+        color: #49645F;
         font-size: 14px;
         line-height: 1.8;
         max-width: 700px;
@@ -234,7 +234,7 @@
     }
 
     .vd-btn:hover {
-        background: #31565c;
+        background: #06645D;
         color: #fff;
         transform: translateY(-2px);
     }
@@ -251,7 +251,7 @@
     }
 
     .vd-back:hover {
-        color: #31565c;
+        color: #06645D;
     }
 
     @media (max-width: 768px) {

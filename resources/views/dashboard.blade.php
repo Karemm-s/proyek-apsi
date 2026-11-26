@@ -7,19 +7,19 @@
 
 <style>
 :root {
-    --blue: #DCE8F4;
-    --sage: #DCE9E2;
-    --lavender: #E9E2F2;
-    --cream: #F5EFE8;
-    --teal: #416C72;
-    --dark: #344B50;
-    --muted: #71838A;
-    --glass: rgba(255,255,255,.68);
-    --glass-border: rgba(255,255,255,.85);
+    --blue: #BFDBFE;
+    --sage: #A7F3D0;
+    --lavender: #DDD6FE;
+    --cream: #FED7AA;
+    --teal: #087F75;
+    --dark: #173B36;
+    --muted: #58736E;
+    --glass: rgba(255,255,255,.82);
+    --glass-border: rgba(255,255,255,.95);
 }
 
 body {
-    background: #F7F9FA;
+    background: #F3FAF7;
     color: var(--dark);
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
@@ -27,9 +27,9 @@ body {
 .ppks-page {
     overflow: hidden;
     background:
-        radial-gradient(ellipse at 5% 5%, rgba(220,232,244,.7), transparent 35%),
-        radial-gradient(ellipse at 95% 30%, rgba(233,226,242,.55), transparent 35%),
-        #F8FAFB;
+        radial-gradient(ellipse at 5% 5%, rgba(191,219,254,.42), transparent 35%),
+        radial-gradient(ellipse at 95% 30%, rgba(167,243,208,.38), transparent 35%),
+        #F6FBF8;
 }
 
 .ppks-page h1,
@@ -45,7 +45,7 @@ body {
 .ppks-muted { color: var(--muted); }
 
 .ppks-gradient-text {
-    background: linear-gradient(110deg, #416C72, #718AA4, #8B7A9F);
+    background: linear-gradient(110deg, #087F75, #2563EB, #7C3AED);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -58,8 +58,8 @@ body {
     padding: 85px 0;
     border-radius: 0 0 45px 45px;
     background:
-        radial-gradient(circle at 85% 15%, rgba(255,255,255,.8), transparent 28%),
-        linear-gradient(125deg, #DCE8F4 0%, #E9E2F2 50%, #DCE9E2 100%);
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,.55), transparent 28%),
+        linear-gradient(118deg, #A7F3D0 0%, #67E8D1 47%, #93C5FD 100%);
 }
 
 .ppks-hero::before,
@@ -95,7 +95,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 9px 17px;
-    background: rgba(255,255,255,.6);
+    background: rgba(255,255,255,.78);
     border: 1px solid rgba(255,255,255,.8);
     border-radius: 50px;
     color: var(--teal);
@@ -113,7 +113,7 @@ body {
 
 .hero-description {
     max-width: 590px;
-    color: #52696F;
+    color: #365C56;
     font-size: 1.05rem;
     line-height: 1.9;
 }
@@ -133,9 +133,9 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: rgba(255,255,255,.42);
-    border: 1px solid rgba(255,255,255,.8);
-    box-shadow: 0 25px 65px rgba(65,108,114,.13);
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(255,255,255,.95);
+    box-shadow: 0 25px 65px rgba(8,127,117,.2);
     backdrop-filter: blur(20px);
 }
 
@@ -174,7 +174,7 @@ body {
 }
 
 .btn-ppks:hover {
-    background: #345A60;
+    background: #06645D;
     color: white;
     transform: translateY(-3px);
 }
@@ -250,10 +250,10 @@ body {
     font-size: 1.7rem;
 }
 
-.icon-blue { background: #E5EDF7; color: #537A9A; }
-.icon-green { background: #E3EEE7; color: #507D69; }
-.icon-purple { background: #EEE8F5; color: #84729C; }
-.icon-cream { background: #F5EEE4; color: #9A8061; }
+.icon-blue { background: #DBEAFE; color: #2563EB; }
+.icon-green { background: #D1FAE5; color: #047857; }
+.icon-purple { background: #EDE9FE; color: #7C3AED; }
+.icon-cream { background: #FFEDD5; color: #C2410C; }
 
 .glass-card h5 {
     font-weight: 800;
@@ -273,14 +273,14 @@ body {
     text-decoration: none;
 }
 
-.card-link:hover { color: #8B7A9F; }
+.card-link:hover { color: #7C3AED; }
 
 /* PRIVACY BANNER */
 
 .privacy-banner {
     padding: 38px;
     border-radius: 28px;
-    background: linear-gradient(120deg, #E5EDF6, #EDE8F4, #E2EEE8);
+    background: linear-gradient(115deg, #BFDBFE, #C4B5FD 48%, #A7F3D0);
     border: 1px solid rgba(255,255,255,.8);
 }
 
@@ -325,10 +325,10 @@ body {
     font-weight: 700;
 }
 
-.tag-blue { background: #E5EDF7; color: #537A9A; }
-.tag-green { background: #E3EEE7; color: #507D69; }
-.tag-purple { background: #EEE8F5; color: #84729C; }
-.tag-cream { background: #F5EEE4; color: #92734F; }
+.tag-blue { background: #DBEAFE; color: #1D4ED8; }
+.tag-green { background: #D1FAE5; color: #047857; }
+.tag-purple { background: #EDE9FE; color: #6D28D9; }
+.tag-cream { background: #FFEDD5; color: #9A3412; }
 
 /* TIMELINE */
 
@@ -347,7 +347,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #DCE8F4, #DCE9E2);
+    background: linear-gradient(135deg, #93C5FD, #6EE7B7);
     border-radius: 17px;
     color: var(--teal);
     font-size: 1.15rem;
@@ -811,7 +811,7 @@ body {
 
     <section class="container pb-5">
         <div class="text-center py-5 px-3"
-             style="background:linear-gradient(120deg,#E5EDF6,#EDE8F4,#E2EEE8);border-radius:28px;">
+             style="background:linear-gradient(115deg,#BFDBFE,#C4B5FD 48%,#A7F3D0);border-radius:28px;">
 
             <div class="icon-box icon-green mx-auto">
                 <i class="bi bi-heart"></i>

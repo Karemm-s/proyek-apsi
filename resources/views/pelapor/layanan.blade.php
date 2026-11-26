@@ -6,17 +6,17 @@
 
 <style>
     .service-page {
-        --sp-blue: #DCE8F4;
-        --sp-sage: #DCE9E2;
-        --sp-lavender: #E9E2F2;
-        --sp-cream: #F5EFE8;
-        --sp-teal: #416C72;
-        --sp-dark: #344B50;
-        --sp-muted: #71838A;
+        --sp-blue: #BFDBFE;
+        --sp-sage: #A7F3D0;
+        --sp-lavender: #DDD6FE;
+        --sp-cream: #FED7AA;
+        --sp-teal: #087F75;
+        --sp-dark: #173B36;
+        --sp-muted: #58736E;
         background:
             radial-gradient(ellipse at 5% 10%, rgba(220,232,244,.55), transparent 35%),
             radial-gradient(ellipse at 95% 35%, rgba(233,226,242,.45), transparent 35%),
-            #F8FAFB;
+            #F3FAF7;
         color: var(--sp-dark);
         overflow: hidden;
     }
@@ -45,7 +45,7 @@
         border-radius: 28px;
         background:
             radial-gradient(circle at 90% 10%, rgba(255,255,255,.8), transparent 30%),
-            linear-gradient(120deg, #DCE8F4, #E9E2F2 55%, #DCE9E2);
+            linear-gradient(120deg, #BFDBFE, #DDD6FE 55%, #A7F3D0);
     }
 
     .sp-hero::before,
@@ -99,7 +99,7 @@
     }
 
     .sp-gradient-text {
-        background: linear-gradient(110deg, #416C72, #718AA4, #8B7A9F);
+        background: linear-gradient(110deg, #087F75, #718AA4, #8B7A9F);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -168,12 +168,12 @@
     }
 
     .sp-icon-blue {
-        background: #E5EDF7;
+        background: #DBEAFE;
         color: #537A9A;
     }
 
     .sp-icon-green {
-        background: #E3EEE7;
+        background: #D1FAE5;
         color: #507D69;
     }
 
@@ -183,7 +183,7 @@
     }
 
     .sp-icon-cream {
-        background: #F5EEE4;
+        background: #FFEDD5;
         color: #9A8061;
     }
 
@@ -239,7 +239,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 18px;
-        background: linear-gradient(135deg, #DCE8F4, #E9E2F2);
+        background: linear-gradient(135deg, #BFDBFE, #DDD6FE);
         color: var(--sp-teal);
         font-size: 1.6rem;
         flex-shrink: 0;
@@ -259,7 +259,7 @@
     .sp-detail-note {
         padding: 17px 20px;
         border-radius: 16px;
-        background: linear-gradient(120deg, #EAF1F8, #F0ECF5);
+        background: linear-gradient(120deg, #EAF1F8, #DDD6FE);
         color: #536D73;
         font-size: .84rem;
         line-height: 1.8;
@@ -270,7 +270,7 @@
     .sp-privacy {
         padding: 38px;
         border-radius: 27px;
-        background: linear-gradient(120deg, #E5EDF6, #EDE8F4, #E2EEE8);
+        background: linear-gradient(120deg, #BFDBFE, #C4B5FD, #A7F3D0);
         border: 1px solid rgba(255,255,255,.9);
     }
 
@@ -305,7 +305,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 16px;
-        background: linear-gradient(135deg, #DCE8F4, #DCE9E2);
+        background: linear-gradient(135deg, #BFDBFE, #A7F3D0);
         color: var(--sp-teal);
         font-weight: 800;
         font-size: 1.05rem;
@@ -344,7 +344,7 @@
     }
 
     .sp-btn-primary:hover {
-        background: #345A60;
+        background: #06645D;
         color: white;
         transform: translateY(-3px);
     }
@@ -374,7 +374,7 @@
     .sp-bottom {
         padding: 42px 30px;
         border-radius: 28px;
-        background: linear-gradient(120deg, #E5EDF6, #EDE8F4, #E2EEE8);
+        background: linear-gradient(120deg, #BFDBFE, #C4B5FD, #A7F3D0);
     }
 
     @media (max-width: 768px) {
@@ -864,7 +864,7 @@
 
                     <div class="col-md-6">
                         <div class="p-3 rounded-4 h-100"
-                             style="background:#F0ECF5;">
+                             style="background:#DDD6FE;">
 
                             <h5 class="fw-bold">
                                 <i class="bi bi-briefcase me-2"></i>

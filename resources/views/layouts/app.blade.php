@@ -20,13 +20,13 @@
 
     <style>
         :root {
-            --ppks-blue: #DCE8F4;
-            --ppks-sage: #DCE9E2;
-            --ppks-lavender: #E9E2F2;
-            --ppks-cream: #F5EFE8;
-            --ppks-teal: #416C72;
-            --ppks-dark: #344B50;
-            --ppks-muted: #71838A;
+            --ppks-blue: #BFDBFE;
+            --ppks-sage: #A7F3D0;
+            --ppks-lavender: #DDD6FE;
+            --ppks-cream: #FED7AA;
+            --ppks-teal: #087F75;
+            --ppks-dark: #173B36;
+            --ppks-muted: #58736E;
         }
 
         * {
@@ -35,7 +35,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #F8FAFB;
+            background: #F3FAF7;
             color: var(--ppks-dark);
             margin: 0;
         }
@@ -49,8 +49,8 @@
             background: rgba(255,255,255,.82);
             backdrop-filter: blur(22px);
             -webkit-backdrop-filter: blur(22px);
-            border-bottom: 1px solid rgba(65,108,114,.10);
-            box-shadow: 0 5px 25px rgba(65,108,114,.045);
+            border-bottom: 1px solid rgba(8,127,117,.15);
+            box-shadow: 0 5px 25px rgba(8,127,117,.08);
             padding: 13px 0;
         }
 
@@ -73,7 +73,7 @@
             justify-content: center;
             align-items: center;
             border-radius: 14px;
-            background: linear-gradient(135deg, #DCE8F4, #DCE9E2);
+            background: linear-gradient(135deg, #A7F3D0, #93C5FD);
             color: var(--ppks-teal);
             font-size: 1.4rem;
         }
@@ -99,7 +99,7 @@
         }
 
         .ppks-navbar .nav-link {
-            color: #65777D;
+            color: #49645F;
             font-size: .88rem;
             font-weight: 600;
             padding: 11px 16px !important;
@@ -109,12 +109,12 @@
 
         .ppks-navbar .nav-link:hover {
             color: var(--ppks-teal);
-            background: rgba(220,233,226,.55);
+            background: #D1FAE5;
         }
 
         .ppks-navbar .nav-link.active {
             color: var(--ppks-teal);
-            background: linear-gradient(120deg, #E5EDF6, #E9E5F1);
+            background: linear-gradient(120deg, #BFDBFE, #A7F3D0);
             font-weight: 700;
         }
 
@@ -134,11 +134,11 @@
             font-size: .85rem;
             font-weight: 700;
             transition: .3s ease;
-            box-shadow: 0 5px 15px rgba(65,108,114,.14);
+            box-shadow: 0 7px 20px rgba(8,127,117,.25);
         }
 
         .btn-portal:hover {
-            background: #345A60;
+            background: #06645D;
             color: white;
             transform: translateY(-2px);
         }
@@ -167,7 +167,7 @@
         .ppks-footer {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(120deg, #E5EDF6, #EDE8F4, #E2EEE8);
+            background: linear-gradient(115deg, #BFDBFE, #C4B5FD 48%, #A7F3D0);
             border-top: 1px solid rgba(255,255,255,.8);
             padding: 35px 0;
             margin-top: 30px;
@@ -179,7 +179,7 @@
         }
 
         .footer-text {
-            color: #71838A;
+            color: #58736E;
             font-size: .82rem;
             line-height: 1.8;
         }

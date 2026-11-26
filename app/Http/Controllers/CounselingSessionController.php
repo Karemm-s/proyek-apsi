@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CaseAssignment;
 use App\Models\CounselingSession;
+use App\Models\AuditLog;
+use App\Models\PsychologistFeedback;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -59,5 +62,42 @@ class CounselingSessionController extends Controller
         $session->update($data);
 
         return back()->with('success', 'Sesi pendampingan diperbarui.');
+    }
+
+    public function feedbackIndex(Request $request)
+    {
+        $reports = Report::query()->whereIn('id', CaseAssignment::where('user_id', $request->user()->id)->where('kind', 'psikolog')->select('report_id'))
+            ->select(['id', 'ticket_number', 'incident_type', 'status', 'referred_at'])->with(['psychologistFeedback' => fn ($query) => $query->where('psychologist_id', $request->user()->id)->latest()])
+            ->latest('referred_at')->paginate(15);
+
+        return view('internal.psychologist-feedback', compact('reports'));
+    }
+
+    public function feedbackStore(Request $request, int $reportId)
+    {
+        $user = $request->user();
+        abort_unless(CaseAssignment::where('report_id', $reportId)->where('user_id', $user->id)->where('kind', 'psikolog')->exists(), 403);
+        $data = $request->validate([
+            'summary' => ['required', 'string', 'max:5000'],
+            'condition_update' => ['required', 'string', 'max:5000'],
+            'recommendation' => ['required', 'string', 'max:5000'],
+        ]);
+        PsychologistFeedback::create($data + ['report_id' => $reportId, 'psychologist_id' => $user->id]);
+        AuditLog::create(['user_id' => $user->id, 'report_id' => $reportId, 'action' => 'psychologist_feedback_submitted', 'reason' => 'Umpan balik psikolog dikirim ke Tim Satgas.', 'ip_address' => $request->ip(), 'created_at' => now()]);
+
+        return back()->with('success', 'Umpan balik tersimpan dan tersedia untuk Tim Satgas yang berwenang.');
+    }
+
+    public function referralLetter(Request $request, int $reportId)
+    {
+        if ($request->user()->role === 'psikolog') {
+            abort_unless(CaseAssignment::where('report_id', $reportId)->where('user_id', $request->user()->id)->where('kind', 'psikolog')->exists(), 403);
+        } else {
+            abort_unless($request->user()->hasRole('ketua_satgas'), 403);
+        }
+        $report = Report::query()->select(['id', 'ticket_number', 'incident_type', 'referred_at'])->findOrFail($reportId);
+        AuditLog::create(['user_id' => $request->user()->id, 'report_id' => $reportId, 'action' => 'referral_letter_printed', 'reason' => 'Surat pengantar rujukan dicetak.', 'ip_address' => $request->ip(), 'created_at' => now()]);
+
+        return response()->view('internal.referral-letter', compact('report'), 200, ['Cache-Control' => 'no-store, private']);
     }
 }

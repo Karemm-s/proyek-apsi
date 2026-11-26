@@ -7,9 +7,9 @@
 
 <style>
     .tracking-page {
-        --track-ink: #344b50;
+        --track-ink: #173B36;
         --track-muted: #7b8c91;
-        --track-teal: #416c72;
+        --track-teal: #087F75;
         --track-line: #e5ecee;
 
         min-height: 80vh;
@@ -17,7 +17,7 @@
         background:
             radial-gradient(circle at 8% 5%, rgba(220,232,244,.75), transparent 28%),
             radial-gradient(circle at 94% 15%, rgba(233,226,242,.7), transparent 28%),
-            #f7f9fa;
+            #F3FAF7;
         color: var(--track-ink);
     }
 
@@ -138,7 +138,7 @@
     }
 
     .tracking-input-group button:hover {
-        background: #345a60;
+        background: #06645D;
         transform: translateY(-1px);
     }
 
@@ -226,7 +226,7 @@
         gap: 15px;
         padding: 19px;
         margin-bottom: 28px;
-        border: 1px solid #dce9e2;
+        border: 1px solid #A7F3D0;
         border-radius: 15px;
         background: linear-gradient(110deg, #edf5f0, #f8fbf9);
     }
@@ -251,14 +251,14 @@
     }
 
     .current-status-value {
-        color: #416c72;
+        color: #087F75;
         font-size: 1rem;
         font-weight: 800;
     }
 
     .current-status-description {
         margin-top: 5px;
-        color: #71858a;
+        color: #58736E;
         font-size: .74rem;
         line-height: 1.6;
     }
@@ -326,8 +326,8 @@
     }
 
     .timeline-item.active .timeline-dot {
-        border: 5px solid #dce9e2;
-        background: #416c72;
+        border: 5px solid #A7F3D0;
+        background: #087F75;
     }
 
     .timeline-item.completed .timeline-indicator::after {
@@ -341,7 +341,7 @@
 
     .timeline-content h4 {
         margin: 1px 0 5px;
-        color: #465d62;
+        color: #264E47;
         font-size: .82rem;
         font-weight: 800;
     }
@@ -412,7 +412,7 @@
         align-items: center;
         gap: 7px;
         margin-top: 23px;
-        color: #71858a;
+        color: #58736E;
         font-size: .77rem;
         font-weight: 700;
         text-decoration: none;
@@ -536,7 +536,7 @@
 
                     <h2>
                         <i class="bi bi-file-earmark-check me-2"
-                           style="color:#416c72;"></i>
+                           style="color:#087F75;"></i>
                         Informasi Pengaduan
                     </h2>
 
@@ -593,7 +593,7 @@
                 <!-- TIMELINE -->
                 <h3 class="timeline-title">
                     <i class="bi bi-list-check me-2"
-                       style="color:#416c72;"></i>
+                       style="color:#087F75;"></i>
                     Tahapan Penanganan Pengaduan
                 </h3>
 

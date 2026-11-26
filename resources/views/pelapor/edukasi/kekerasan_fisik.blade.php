@@ -7,13 +7,13 @@
 
 <style>
     .physical-detail-page {
-        --pd-ink: #344b50;
-        --pd-muted: #71838a;
-        --pd-teal: #416c72;
-        --pd-blue: #dce8f4;
-        --pd-sage: #dce9e2;
-        --pd-lavender: #e9e2f2;
-        --pd-cream: #f5efe8;
+        --pd-ink: #173B36;
+        --pd-muted: #58736E;
+        --pd-teal: #087F75;
+        --pd-blue: #BFDBFE;
+        --pd-sage: #A7F3D0;
+        --pd-lavender: #DDD6FE;
+        --pd-cream: #FED7AA;
 
         color: var(--pd-ink);
         padding-bottom: 75px;
@@ -45,9 +45,9 @@
         border-radius: 28px;
         background: linear-gradient(
             125deg,
-            #dce8f4 0%,
-            #e9e2f2 55%,
-            #dce9e2 100%
+            #BFDBFE 0%,
+            #DDD6FE 55%,
+            #A7F3D0 100%
         );
         margin-bottom: 45px;
     }
@@ -86,7 +86,7 @@
 
     .pd-hero p {
         max-width: 670px;
-        color: #5d7177;
+        color: #49645F;
         line-height: 1.8;
         margin-bottom: 0;
         font-size: 15px;
@@ -144,7 +144,7 @@
     .pd-content-card p,
     .pd-content-card li {
         font-size: 14px;
-        color: #71838a;
+        color: #58736E;
         line-height: 1.8;
     }
 
@@ -201,7 +201,7 @@
     .pd-help-box {
         padding: 32px;
         border-radius: 22px;
-        background: linear-gradient(120deg, #dce9e2, #e9e2f2);
+        background: linear-gradient(120deg, #A7F3D0, #DDD6FE);
         margin-top: 45px;
     }
 
@@ -212,7 +212,7 @@
     }
 
     .pd-help-box p {
-        color: #62777b;
+        color: #49645F;
         font-size: 14px;
         line-height: 1.8;
         max-width: 700px;
@@ -234,7 +234,7 @@
     }
 
     .pd-btn:hover {
-        background: #31565c;
+        background: #06645D;
         color: #fff;
         transform: translateY(-2px);
     }
@@ -251,7 +251,7 @@
     }
 
     .pd-back:hover {
-        color: #31565c;
+        color: #06645D;
     }
 
     @media (max-width: 768px) {

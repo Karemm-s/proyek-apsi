@@ -7,13 +7,13 @@
 
 <style>
     .electronic-detail-page {
-        --ed-ink: #344B50;
-        --ed-muted: #71838A;
-        --ed-teal: #416C72;
-        --ed-blue: #DCE8F4;
-        --ed-sage: #DCE9E2;
-        --ed-lavender: #E9E2F2;
-        --ed-cream: #F5EFE8;
+        --ed-ink: #173B36;
+        --ed-muted: #58736E;
+        --ed-teal: #087F75;
+        --ed-blue: #BFDBFE;
+        --ed-sage: #A7F3D0;
+        --ed-lavender: #DDD6FE;
+        --ed-cream: #FED7AA;
         --ed-white: #FFFFFF;
 
         color: var(--ed-ink);
@@ -41,7 +41,7 @@
     }
 
     .ed-hero {
-        background: linear-gradient(120deg, #DCE8F4, #E9E2F2);
+        background: linear-gradient(120deg, #BFDBFE, #DDD6FE);
         border-radius: 25px;
         padding: 55px 45px;
         position: relative;
@@ -85,7 +85,7 @@
     }
 
     .ed-hero p {
-        color: #596E74;
+        color: #49645F;
         line-height: 1.8;
         font-size: 15px;
         margin-bottom: 25px;
@@ -106,7 +106,7 @@
     }
 
     .ed-btn:hover {
-        background: #31575D;
+        background: #087F75;
         color: white;
         transform: translateY(-2px);
     }
@@ -182,7 +182,7 @@
     }
 
     .ed-example {
-        background: #F8FAFB;
+        background: #F3FAF7;
         border: 1px solid #E9EFF0;
         padding: 19px;
         border-radius: 15px;
@@ -202,7 +202,7 @@
     }
 
     .ed-note {
-        background: #F5F0F9;
+        background: #EDE9FE;
         border-left: 4px solid #A99BC0;
         border-radius: 12px;
         padding: 20px 22px;
@@ -244,7 +244,7 @@
     }
 
     .ed-highlight {
-        background: linear-gradient(120deg, #E7F0F5, #E8EFE9);
+        background: linear-gradient(120deg, #DBEAFE, #D1FAE5);
         border-radius: 20px;
         padding: 28px;
     }
@@ -284,7 +284,7 @@
 
    
 .ed-bottom {
-    background: linear-gradient(120deg, #DCE8F4, #E9E2F2);
+    background: linear-gradient(120deg, #BFDBFE, #DDD6FE);
     border-radius: 22px;
     padding: 32px;
     margin-top: 45px;
@@ -304,7 +304,7 @@
     align-items: center;
     justify-content: center;
     background: rgba(255,255,255,.7);
-    color: #416C72;
+    color: #087F75;
     border-radius: 18px;
     font-size: 27px;
 }
@@ -316,26 +316,26 @@
 .ed-bottom h2 {
     font-size: 20px;
     font-weight: 700;
-    color: #344B50;
+    color: #173B36;
     margin-bottom: 9px;
 }
 
 .ed-bottom p {
-    color: #71838A;
+    color: #58736E;
     font-size: 13px;
     line-height: 1.8;
     margin: 0;
 }
 
 .ed-bottom .ed-btn {
-    background: #416C72;
+    background: #087F75;
     color: white;
     white-space: nowrap;
     flex-shrink: 0;
 }
 
 .ed-bottom .ed-btn:hover {
-    background: #31575D;
+    background: #087F75;
     color: white;
 }
 
@@ -363,7 +363,7 @@
     }
 
     .ed-back:hover {
-        color: #294E54;
+        color: #134E4A;
     }
 
     @media (max-width: 768px) {

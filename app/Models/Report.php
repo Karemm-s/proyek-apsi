@@ -82,4 +82,9 @@ class Report extends Model
     {
         return $this->hasMany(Evidence::class);
     }
+
+    public function psychologistFeedback()
+    {
+        return $this->hasMany(PsychologistFeedback::class);
+    }
 }

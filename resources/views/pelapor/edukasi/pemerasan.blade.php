@@ -7,13 +7,13 @@
 
 <style>
     .extortion-page {
-        --ep-ink: #344B50;
-        --ep-muted: #71838A;
-        --ep-teal: #416C72;
-        --ep-blue: #DCE8F4;
-        --ep-sage: #DCE9E2;
-        --ep-lavender: #E9E2F2;
-        --ep-cream: #F5EFE8;
+        --ep-ink: #173B36;
+        --ep-muted: #58736E;
+        --ep-teal: #087F75;
+        --ep-blue: #BFDBFE;
+        --ep-sage: #A7F3D0;
+        --ep-lavender: #DDD6FE;
+        --ep-cream: #FED7AA;
 
         color: var(--ep-ink);
         padding-bottom: 75px;
@@ -40,7 +40,7 @@
     }
 
     .ep-hero {
-        background: linear-gradient(120deg, #DCE9E2, #E9E2F2);
+        background: linear-gradient(120deg, #A7F3D0, #DDD6FE);
         border-radius: 25px;
         padding: 55px 45px;
         position: relative;
@@ -84,7 +84,7 @@
     }
 
     .ep-hero p {
-        color: #596E74;
+        color: #49645F;
         line-height: 1.8;
         font-size: 15px;
         margin-bottom: 25px;
@@ -105,7 +105,7 @@
     }
 
     .ep-btn:hover {
-        background: #31575D;
+        background: #087F75;
         color: white;
         transform: translateY(-2px);
     }
@@ -181,7 +181,7 @@
     }
 
     .ep-example {
-        background: #F8FAFB;
+        background: #F3FAF7;
         border: 1px solid #E9EFF0;
         padding: 19px;
         border-radius: 15px;
@@ -201,7 +201,7 @@
     }
 
     .ep-note {
-        background: #F5F0F9;
+        background: #EDE9FE;
         border-left: 4px solid #A99BC0;
         border-radius: 12px;
         padding: 20px 22px;
@@ -243,7 +243,7 @@
     }
 
     .ep-highlight {
-        background: linear-gradient(120deg, #E7F0F5, #E8EFE9);
+        background: linear-gradient(120deg, #DBEAFE, #D1FAE5);
         border-radius: 20px;
         padding: 28px;
     }
@@ -283,7 +283,7 @@
 
     /* CTA */
     .ep-bottom {
-        background: linear-gradient(120deg, #DCE8F4, #E9E2F2);
+        background: linear-gradient(120deg, #BFDBFE, #DDD6FE);
         border-radius: 22px;
         padding: 32px;
         margin-top: 45px;
@@ -303,7 +303,7 @@
         align-items: center;
         justify-content: center;
         background: rgba(255,255,255,.7);
-        color: #416C72;
+        color: #087F75;
         border-radius: 18px;
         font-size: 27px;
     }
@@ -315,26 +315,26 @@
     .ep-bottom h2 {
         font-size: 20px;
         font-weight: 700;
-        color: #344B50;
+        color: #173B36;
         margin-bottom: 9px;
     }
 
     .ep-bottom p {
-        color: #71838A;
+        color: #58736E;
         font-size: 13px;
         line-height: 1.8;
         margin: 0;
     }
 
     .ep-bottom .ep-btn {
-        background: #416C72;
+        background: #087F75;
         color: white;
         white-space: nowrap;
         flex-shrink: 0;
     }
 
     .ep-bottom .ep-btn:hover {
-        background: #31575D;
+        background: #087F75;
         color: white;
     }
 
@@ -350,7 +350,7 @@
     }
 
     .ep-back:hover {
-        color: #294E54;
+        color: #134E4A;
     }
 
     @media (max-width: 768px) {

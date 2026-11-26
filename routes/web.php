@@ -47,6 +47,10 @@ Route::prefix('internal')->name('internal.')->group(function () {
         Route::get('/jadwal-pendampingan', [CounselingSessionController::class, 'index'])->middleware('role:psikolog')->name('sessions');
         Route::post('/pengaduan/{reportId}/sesi', [CounselingSessionController::class, 'store'])->middleware('role:psikolog')->whereNumber('reportId')->name('sessions.store');
         Route::put('/sesi/{sessionId}', [CounselingSessionController::class, 'update'])->middleware('role:psikolog')->whereNumber('sessionId')->name('sessions.update');
+        Route::get('/umpan-balik-psikolog', [CounselingSessionController::class, 'feedbackIndex'])->middleware('role:psikolog')->name('psychologist.feedback');
+        Route::post('/pengaduan/{reportId}/umpan-balik', [CounselingSessionController::class, 'feedbackStore'])->middleware('role:psikolog')->whereNumber('reportId')->name('psychologist.feedback.store');
+        Route::get('/surat-rujukan/{reportId}', [CounselingSessionController::class, 'referralLetter'])->middleware('role:ketua_satgas,psikolog')->whereNumber('reportId')->name('psychologist.referral-letter');
+        Route::get('/tugas-saya', [InternalDashboardController::class, 'staffAssignments'])->middleware('role:tim_satgas')->name('staff.assignments');
         Route::get('/profil', [InternalDashboardController::class, 'profile'])->middleware('role:tim_satgas,ketua_satgas,psikolog,pimpinan')->name('profile');
         Route::get('/', [InternalDashboardController::class, 'index'])->middleware('role:tim_satgas,ketua_satgas,psikolog,pimpinan')->name('dashboard');
         Route::get('/monitoring', [InternalDashboardController::class, 'monitoring'])->middleware('role:ketua_satgas,pimpinan')->name('monitoring');
@@ -55,10 +59,12 @@ Route::prefix('internal')->name('internal.')->group(function () {
         Route::get('/penugasan-rujukan', [InternalDashboardController::class, 'assignments'])->middleware('role:ketua_satgas')->name('assignments');
         Route::get('/unmasking', [InternalDashboardController::class, 'unmasking'])->middleware('role:ketua_satgas')->name('unmasking');
         Route::get('/pemanggilan', [InternalDashboardController::class, 'summons'])->middleware('role:ketua_satgas')->name('summons');
+        Route::get('/pemanggilan-tim', [InternalDashboardController::class, 'summons'])->middleware('role:tim_satgas')->name('staff.summons');
         Route::get('/eskalasi', [InternalDashboardController::class, 'escalations'])->middleware('role:ketua_satgas,pimpinan')->name('escalations');
-        Route::post('/pengaduan/{report}/pemanggilan', [InternalDashboardController::class, 'storeSummons'])->middleware('role:ketua_satgas')->name('summons.store');
-        Route::patch('/pemanggilan/{summons}/status', [InternalDashboardController::class, 'updateSummons'])->middleware('role:ketua_satgas')->name('summons.update');
-        Route::get('/pemanggilan/{summons}/cetak', [InternalDashboardController::class, 'printSummons'])->middleware('role:ketua_satgas')->name('summons.print');
+        Route::get('/eskalasi/{reportId}/ringkasan', [InternalDashboardController::class, 'leadershipExcerpt'])->middleware('role:pimpinan')->whereNumber('reportId')->name('leadership.excerpt');
+        Route::post('/pengaduan/{report}/pemanggilan', [InternalDashboardController::class, 'storeSummons'])->middleware('role:tim_satgas,ketua_satgas')->name('summons.store');
+        Route::patch('/pemanggilan/{summons}/status', [InternalDashboardController::class, 'updateSummons'])->middleware('role:tim_satgas,ketua_satgas')->name('summons.update');
+        Route::get('/pemanggilan/{summons}/cetak', [InternalDashboardController::class, 'printSummons'])->middleware('role:tim_satgas,ketua_satgas')->name('summons.print');
         Route::get('/riwayat-monitoring', [InternalDashboardController::class, 'history'])->middleware('role:ketua_satgas,pimpinan')->name('history');
         Route::get('/audit-log', [InternalDashboardController::class, 'audit'])->middleware('role:ketua_satgas')->name('audit');
         Route::get('/laporan/ekspor', [InternalDashboardController::class, 'export'])->middleware('role:ketua_satgas,pimpinan')->name('export');
@@ -67,6 +73,22 @@ Route::prefix('internal')->name('internal.')->group(function () {
         Route::post('/pengaduan/{report}/petugas', [InternalDashboardController::class, 'assignStaff'])->middleware('role:ketua_satgas')->name('staff.assign-case');
         Route::post('/pengaduan/{report}/unmask', [InternalDashboardController::class, 'unmask'])->middleware('role:ketua_satgas')->name('unmask');
         Route::get('/pengaduan/{reportId}', [InternalDashboardController::class, 'showCase'])->middleware('role:tim_satgas,ketua_satgas,psikolog')->whereNumber('reportId')->name('case.show');
+        Route::post('/pengaduan/{report}/bukti', [InternalDashboardController::class, 'storeEvidence'])->middleware('role:tim_satgas,ketua_satgas')->name('evidence.store');
+        Route::get('/bukti/{evidence}/preview', function (Evidence $evidence) {
+            $user = request()->user();
+            $report = Report::findOrFail($evidence->report_id);
+            abort_unless($user->hasRole('tim_satgas', 'ketua_satgas'), 403);
+            abort_unless(app(\Illuminate\Contracts\Auth\Access\Gate::class)->allows('view', $report), 403);
+            abort_unless(Storage::disk($evidence->disk)->exists($evidence->path), 404);
+            AuditLog::create(['user_id' => $user->id, 'report_id' => $evidence->report_id, 'action' => 'evidence_previewed', 'ip_address' => request()->ip(), 'created_at' => now()]);
+
+            return response()->stream(fn () => fpassthru(Storage::disk($evidence->disk)->readStream($evidence->path)), 200, [
+                'Content-Type' => $evidence->mime_type,
+                'Content-Disposition' => 'inline; filename="'.str_replace(['"', "\\", "\r", "\n"], '', basename($evidence->original_name)).'"',
+                'X-Content-Type-Options' => 'nosniff',
+                'Cache-Control' => 'no-store, private',
+            ]);
+        })->middleware('role:tim_satgas,ketua_satgas')->name('evidence.preview');
         Route::get('/bukti/{evidence}', function (Evidence $evidence) {
             $user = request()->user();
             abort_unless($user->hasRole('tim_satgas', 'ketua_satgas', 'psikolog'), 403);
