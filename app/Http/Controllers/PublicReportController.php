@@ -16,10 +16,7 @@ class PublicReportController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'reporter_type' => ['required', 'in:korban,saksi_perantara'],
-            'reporter_name' => ['required', 'string', 'max:160'],
-            'reporter_identity' => ['required', 'string', 'max:160'],
-            'reporter_phone' => ['required', 'string', 'max:50'],
-            'reporter_email' => ['nullable', 'email', 'max:190'],
+            'reporter_email' => ['required', 'email', 'max:190'],
             'victim_name' => ['nullable', 'string', 'max:160'],
             'victim_contact' => ['nullable', 'string', 'max:100'],
             'victim_gender' => ['nullable', 'in:perempuan,laki_laki,tidak_menyebutkan'],
@@ -37,9 +34,8 @@ class PublicReportController extends Controller
         ], [
             'reporter_type.required' => 'Pilih apakah kamu korban atau saksi/perantara.',
             'reporter_type.in' => 'Pilihan peran pelapor tidak valid. Pilih korban atau saksi/perantara.',
-            'reporter_name.required' => 'Nama lengkap pelapor wajib diisi.',
-            'reporter_identity.required' => 'NIM wajib diisi.',
-            'reporter_phone.required' => 'Nomor WhatsApp aktif wajib diisi.',
+            'reporter_email.required' => 'Email pelapor wajib diisi agar Satgas dapat menghubungi kamu.',
+            'reporter_email.email' => 'Masukkan alamat email yang valid.',
             'incident_type.required' => 'Pilih bentuk kejadian.',
             'incident_location.required' => 'Lokasi kejadian wajib diisi.',
             'incident_story.required' => 'Kronologi kejadian wajib diisi.',
@@ -63,7 +59,7 @@ class PublicReportController extends Controller
             $report = Report::create([
                 'ticket_number' => $ticket,
                 'reporter_type' => $data['reporter_type'],
-                'reporter_data' => array_intersect_key($data, array_flip(['reporter_name', 'reporter_identity', 'reporter_phone', 'reporter_email', 'victim_name', 'victim_contact', 'victim_gender', 'reported_name', 'reported_status'])),
+                'reporter_data' => array_intersect_key($data, array_flip(['reporter_email', 'victim_name', 'victim_contact', 'victim_gender', 'reported_name', 'reported_status'])),
                 'incident_type' => $data['incident_type'],
                 'incident_date' => $data['incident_date'] ?? null,
                 'incident_time' => $data['incident_time'] ?? null,

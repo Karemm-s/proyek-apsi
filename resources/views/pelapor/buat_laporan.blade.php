@@ -619,16 +619,14 @@
 
             <div>
                 <strong>
-                    Identitasmu dijaga dengan mekanisme perlindungan data
+                    Kamu dapat mengirim pengaduan secara anonim
                 </strong>
 
                 <p>
-                    Formulir ini meminta identitas asli agar Satgas dapat
-                    melakukan konfirmasi. Dalam tampilan kerja internal,
-                    identitas ditampilkan dalam bentuk tersamarkan
-                    (masking). Pembukaan identitas asli (unmasking)
-                    hanya dapat dilakukan oleh Ketua Satgas sesuai
-                    kewenangan dan harus tercatat dalam riwayat aktivitas.
+                    Nama, NIM, dan nomor telepon tidak diminta. Email bersifat
+                    opsional jika kamu ingin dihubungi Satgas. Jika email
+                    dikosongkan, pengaduan tetap dapat dikirim tanpa kontak
+                    pelapor.
                 </p>
             </div>
         </div>
@@ -677,7 +675,7 @@
 
                         <div>
                             <h3>Informasi pelapor</h3>
-                            <p>Data orang yang menyampaikan pengaduan.</p>
+                    <p>Isi email yang dapat dihubungi. Nama, NIM, dan nomor telepon tidak diminta.</p>
                         </div>
                     </div>
 
@@ -740,23 +738,6 @@
                     <div class="row g-3">
 
                         <div class="col-md-6">
-                            <label for="reporter_name" class="form-label">
-                                Nama lengkap pelapor
-                                <span class="required-mark">*</span>
-                            </label>
-
-                            <input
-                                id="reporter_name"
-                                name="reporter_name"
-                                type="text"
-                                class="form-control"
-                                placeholder="Nama sesuai identitas"
-                                autocomplete="name"
-                                required
-                            >
-                        </div>
-
-                        <div class="col-md-6">
                             <label for="victim_gender" class="form-label">Gender korban (opsional)</label>
                             <select id="victim_gender" name="victim_gender" class="form-select">
                                 <option value="">Pilih jika berkenan</option>
@@ -769,7 +750,8 @@
 
                         <div class="col-md-6">
                             <label for="reporter_email" class="form-label">
-                                Email aktif (opsional)
+                                Email untuk dihubungi Satgas
+                                <span class="required-mark">*</span>
                             </label>
 
                             <input
@@ -779,7 +761,10 @@
                                 class="form-control"
                                 placeholder="nama@email.com"
                                 autocomplete="email"
+                                value="{{ old('reporter_email') }}"
+                                required
                             >
+                            <small class="field-help">Email digunakan untuk keperluan konfirmasi. Nama, NIM, dan nomor telepon tidak diminta.</small>
                         </div>
 
                     </div>
@@ -1205,9 +1190,8 @@
 
                     <small>
                         <i class="bi bi-info-circle me-1"></i>
-                        Identitas pelapor disamarkan dalam tampilan kerja
-                        internal. Pembukaan identitas asli hanya dapat
-                        dilakukan oleh Ketua Satgas sesuai kewenangan.
+                        Email pelapor (jika diberikan) disamarkan pada tampilan
+                        kerja internal.
                     </small>
 
                     <button

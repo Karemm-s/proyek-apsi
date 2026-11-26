@@ -389,27 +389,20 @@ class InternalDashboardController extends Controller
             ->whereIn('action', ['evidence_uploaded', 'evidence_previewed', 'evidence_downloaded'])
             ->latest('created_at')->get();
         $reporter = $report->reporter_data;
-        $maskedReporter = [
-            'name' => $this->maskName($reporter['reporter_name'] ?? ''),
-            'phone' => $this->maskPhone($reporter['reporter_phone'] ?? ''),
-            'identity' => 'Dilindungi',
-        ];
+        $maskedReporter = ['email' => $this->maskEmail($reporter['reporter_email'] ?? '')];
 
         return view('internal.case-detail', compact('report', 'maskedReporter', 'evidenceHistory'));
     }
 
-    private function maskName(string $name): string
+    private function maskEmail(string $email): string
     {
-        return collect(preg_split('/\s+/', trim($name)))->filter()->map(function ($part) {
-            return mb_substr($part, 0, 1).str_repeat('*', max(3, mb_strlen($part) - 1));
-        })->implode(' ');
-    }
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return 'Tidak diberikan';
+        }
 
-    private function maskPhone(string $phone): string
-    {
-        $digits = preg_replace('/\D+/', '', $phone);
+        [$local, $domain] = explode('@', $email, 2);
 
-        return $digits ? str_repeat('*', max(4, strlen($digits) - 2)).substr($digits, -2) : 'Dilindungi';
+        return mb_substr($local, 0, 1).str_repeat('*', max(3, mb_strlen($local) - 1)).'@'.$domain;
     }
 
     public function unmask(Request $request, Report $report)
